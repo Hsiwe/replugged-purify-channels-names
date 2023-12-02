@@ -1,24 +1,24 @@
-import { Injector, Logger, webpack } from "replugged";
+import { Injector, webpack } from "replugged";
 
 const inject = new Injector();
-const logger = Logger.plugin("PluginTemplate");
 
 export async function start(): Promise<void> {
-  const typingMod = await webpack.waitForModule<{
-    startTyping: (channelId: string) => void;
-  }>(webpack.filters.byProps("startTyping"));
-  const getChannelMod = await webpack.waitForModule<{
-    getChannel: (id: string) => {
-      name: string;
-    };
-  }>(webpack.filters.byProps("getChannel"));
+  const channelModule = await webpack.waitForProps("getGuildChannelsVersion");
 
-  if (typingMod && getChannelMod) {
-    inject.instead(typingMod, "startTyping", ([channel]) => {
-      const channelObj = getChannelMod.getChannel(channel);
-      logger.log(`Typing prevented! Channel: #${channelObj?.name ?? "unknown"} (${channel}).`);
-    });
-  }
+  inject.after(channelModule as any, "getMutableBasicGuildChannelsForGuild", async (_, res) => {
+    try {
+      const allChannels: [string, { name: string }][] = Object.entries(res);
+      allChannels.forEach(([_, channel]) => {
+        channel.name = channel.name.replaceAll(
+          /(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])/g,
+          "",
+        );
+      });
+      return res;
+    } catch (_) {
+      return res;
+    }
+  });
 }
 
 export function stop(): void {

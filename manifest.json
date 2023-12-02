@@ -1,11 +1,11 @@
 {
-  "id": "dev.replugged.PluginTemplate",
-  "name": "Plugin Template",
-  "description": "A plugin template",
+  "id": "dev.hsiwe.purifyChannelsNames",
+  "name": "Purify channels names",
+  "description": "Remove all non-text content from channels names",
   "author": {
-    "name": "replugged",
-    "discordID": "1000992611840049192",
-    "github": "replugged-org"
+    "name": "Hsiwe",
+    "discordID": "376466070912892928",
+    "github": "hsiwe"
   },
   "version": "1.0.0",
   "updater": {
@@ -15,6 +15,8 @@
   "license": "MIT",
   "type": "replugged-plugin",
   "renderer": "src/index.ts",
-  "source": "https://github.com/replugged-org/plugin-template",
-  "image": ["https://i.imgur.com/14CNs3a.png?CHANGE-THIS-URL"]
+  "source": "https://github.com/Hsiwe/replugged-purify-channels-names",
+  "image": [
+    "https://media.discordapp.net/attachments/1149592811923058739/1180642369985577080/photo_2023-12-02_16-26-39.jpg"
+  ]
 }
