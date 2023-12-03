@@ -9,8 +9,8 @@
   },
   "version": "1.0.0",
   "updater": {
-    "type": "github",
-    "id": "replugged-org/plugin-template"
+    "type": "store",
+    "id": "dev.hsiwe.purifyChannelsNames"
   },
   "license": "MIT",
   "type": "replugged-plugin",
